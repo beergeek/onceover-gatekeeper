@@ -21,7 +21,7 @@ class Onceover
       end
 
       def build
-        build_catalog_without_cache(node_name, facts, hiera_config, code, nil).resources.reject { |r|
+        build_catalog_without_cache(node_name, facts, {}, hiera_config, code, false, nil).resources.reject { |r|
           ['Class', 'Stage'].include?(r.type)
         }.map { |r|
           temp = r.to_hash.merge(:type => r.type.downcase)
