@@ -20,12 +20,13 @@ class Onceover
         c = Onceover::Gatekeeper::Compiler.new
 
         # Set up settings from onceover
-        c.node_name    = tst.nodes[0].fact_set['fqdn']
-        c.facts        = tst.nodes[0].fact_set
-        c.hiera_config = @repo.hiera_config
-        c.code         = "include #{tst.test_config['static_classes'].join("\ninclude ")}"
-        c.environment  = 'production'
-        c.modulepath   = @repo.temp_modulepath.split(':')
+        c.node_name     = tst.nodes[0].fact_set['fqdn']
+        c.facts         = tst.nodes[0].fact_set
+        c.trusted_facts = tst.nodes[0].trusted_fact_set
+        c.hiera_config  = @repo.hiera_config
+        c.code          = "include #{tst.test_config['static_classes'].join("\ninclude ")}"
+        c.environment   = 'production'
+        c.modulepath    = @repo.temp_modulepath.split(':')
 
         # Template variables
         examples_name  = tst.to_s
