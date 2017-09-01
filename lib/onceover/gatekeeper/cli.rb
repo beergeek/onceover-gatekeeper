@@ -14,7 +14,7 @@ class Onceover
           # TODO: Integrate this correctly
           option :n, :node, 'The name of the node', {:argument => :required}
           option :f, :facts, 'The path to the facts json', {:argument => :required}
-          option :t, :trusted, 'The path to the trusted facts json'
+          option :t, :trusted, 'The path to the trusted facts json', {:argument => :optional}
           option :r, :hiera, 'The path to the hiera config file', {:argument => :required}
           option :e, :environment, 'The environment name', {:argument => :required}
           option :m, :modulepath, 'The path to the modules', {:argument => :required, :multiple => true}
