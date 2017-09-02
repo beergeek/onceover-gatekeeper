@@ -5,7 +5,13 @@ shared_examples_for '<%= examples_name %>' do |fact_set|
 <% resources.each do |resource| %>
     it { is_expected.to contain_<%= resource[:type] %>(<%= resource[:name].to_s.inspect %>).with({
 <% resource.reject{|k,v|rejected_keys.include? k}.each do |attribute,value| -%>
+    <% if value.class(String) %>
+      '<%= attribute.to_s %>' => <%= value.to_s.inspect %>,
+    <% elsif value.class(FalseClass) || value.class(TrueClass) || value.class(Integer) || value.class(Float) %>
       '<%= attribute.to_s %>' => <%= value %>,
+    <% else %>
+      '<%= attribute.to_s %>' => <%= value %>,
+    <% end %>
 <% end -%>
     })}
 <% end %>
