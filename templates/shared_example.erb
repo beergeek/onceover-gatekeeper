@@ -6,7 +6,7 @@ shared_examples_for '<%= examples_name %>' do |fact_set|
     it { is_expected.to contain_<%= resource[:type] %>(<%= resource[:name].to_s.inspect %>).with({
 <% resource.reject{|k,v|rejected_keys.include? k}.each do |attribute,value| -%>
   '<%= attribute.to_s %>' => <%= value.to_s.inspect %>,
-  <% puts object.is_a?(value) %>
+  <% puts value.is_a?(String) %>
 <% end -%>
     })}
 <% end %>
