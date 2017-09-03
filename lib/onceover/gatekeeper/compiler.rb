@@ -27,10 +27,10 @@ class Onceover
           r.each {|k,v| v.downcase! if k == :type}
           temp = r #.to_hash.merge(:type => r.type.downcase)
 
-          if r.builtin_type?
-            temp[:name] = r.uniqueness_key.first
-            temp.delete(r.key_attributes.first)
-          end
+          #if r.builtin_type?
+          #  temp[:name] = r.uniqueness_key.first
+          #  temp.delete(r.key_attributes.first)
+          #end
 
           temp
         }
