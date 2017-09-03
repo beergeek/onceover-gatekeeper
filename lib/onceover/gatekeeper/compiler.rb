@@ -24,7 +24,8 @@ class Onceover
         build_catalog_without_cache(node_name, facts, trusted_facts, hiera_config, code, false, {}).resources.reject { |r|
           ['Class', 'Stage'].include?(r.type)
         }.map { |r|
-          temp = r.to_hash.merge(:type => r.type.downcase)
+          r.each {|k,v| v.downcase! if k == :type}
+          temp = r #.to_hash.merge(:type => r.type.downcase)
 
           if r.builtin_type?
             temp[:name] = r.uniqueness_key.first
