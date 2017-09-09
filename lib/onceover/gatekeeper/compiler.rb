@@ -24,13 +24,14 @@ class Onceover
         build_catalog_without_cache(node_name, facts, trusted_facts, hiera_config, code, false, {}).resources.reject { |r|
           ['Class', 'Stage'].include?(r.type)
         }.map { |r|
-          r.each {|k,v| v.downcase! if k == :type}
-          temp = r #.to_hash.merge(:type => r.type.downcase)
+          x = r.to_data_hash
+          temp = Marshal.load(Marshal.dump(x))
+          temp['type'].downcase!
 
-          #if r.builtin_type?
-          #  temp[:name] = r.uniqueness_key.first
-          #  temp.delete(r.key_attributes.first)
-          #end
+          if r.builtin_type?
+            temp[:name] = r.uniqueness_key.first
+            temp.delete(r.key_attributes.first)
+          end
 
           temp
         }
